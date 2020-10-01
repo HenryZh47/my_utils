@@ -1,0 +1,2 @@
+/usr/local/bin/kitti2bag
+/usr/local/lib/python2.7/dist-packages/kitti2bag-1.5-py2.7.egg
