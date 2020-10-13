@@ -1,2 +1,6 @@
 *.pyc
 sensor_calibration_tools
+*devel
+*build
+*log
+

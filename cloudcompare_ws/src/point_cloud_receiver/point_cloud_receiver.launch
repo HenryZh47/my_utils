@@ -1,0 +1,10 @@
+<launch>
+  <arg name="prefix" default="unknown"/>
+  <node pkg="point_cloud_receiver" type="velodyneCloudReceiver" name="velodyneCloudReceiver" output="screen">
+    <param name="logSensorPath" type="bool" value="true" />
+    <param name="laserCloudSkipDis" type="double" value="0.02" />
+    <param name="maxPointNum" type="int" value="30000000" />
+    <param name="filePrefix" type="string" value="$(arg prefix)" />
+  </node>
+
+</launch>
