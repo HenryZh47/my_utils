@@ -18,6 +18,7 @@ def main():
     parser.add_argument("bag_file", help="Input ROS bag.")
     parser.add_argument("output_dir", help="Output directory.")
     parser.add_argument("image_topic", help="Image topic.")
+    parser.add_argument("skip_frames", type=int, help="skip number of frames")
 
     args = parser.parse_args()
 
@@ -28,12 +29,13 @@ def main():
     bridge = CvBridge()
     count = 0
     for topic, msg, t in bag.read_messages(topics=[args.image_topic]):
-        cv_img = bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
-        timestr = str(int((msg.header.stamp.secs + msg.header.stamp.nsecs/ 1.0e9)*1e9))
-        timestr = timestr + ".png"
+        if count % args.skip_frames == 0:
+            cv_img = bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
+            timestr = str(int((msg.header.stamp.secs + msg.header.stamp.nsecs/ 1.0e9)*1e9))
+            timestr = timestr + ".png"
 
-        cv2.imwrite(os.path.join(args.output_dir, timestr), cv_img)
-        print ("Wrote image %i" % count)
+            cv2.imwrite(os.path.join(args.output_dir, timestr), cv_img)
+            print ("Wrote image %i" % count)
 
         count += 1
 
