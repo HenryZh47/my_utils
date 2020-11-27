@@ -30,7 +30,7 @@ def main():
     count = 0
     for topic, msg, t in bag.read_messages(topics=[args.image_topic]):
         if count % args.skip_frames == 0:
-            cv_img = bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
+            cv_img = bridge.imgmsg_to_cv2(msg, desired_encoding="bgr8")
             timestr = str(int((msg.header.stamp.secs + msg.header.stamp.nsecs/ 1.0e9)*1e9))
             timestr = timestr + ".png"
 
