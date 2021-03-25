@@ -16,7 +16,7 @@ SUBTITLE_FILE = args.subtitle_file
 FRAMES_FOLDER = args.frames_folder
 OUTPUT_FOLDER = args.output_folder
 INPUT_FRAME_RATE = 24
-OUTPUT_FRAME_RATE = 4
+OUTPUT_FRAME_RATE = 24
 START_FRAME_NUM = 1  # 16+1
 
 
