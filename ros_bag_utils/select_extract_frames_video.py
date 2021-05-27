@@ -13,6 +13,7 @@ def main():
     # argument parsing
     parser = argparse.ArgumentParser(description="extract video frames to a folder")
     parser.add_argument('video_path', type=str, help="video file path")
+    parser.add_argument('downsample_rate', type=int, help="downsample rate")
     parser.add_argument('--output_dir', type=str, default="", help="output directory path")
     args = parser.parse_args()
 
@@ -61,6 +62,11 @@ def main():
                 # save the current frame
                 frame_name = output_dir + ("/frame_%d" %(save_frame_num)) + ".jpg"
                 save_frame_num += 1
+
+                height, width = frame.shape[:2]
+                new_height = int(height / args.downsample_rate)
+                new_width = int(width / args.downsample_rate)
+                frame = cv2.resize(frame, (new_width, new_height))
                 cv2.imwrite(frame_name, frame)
                 print("saved frame: %s" %(frame_name))
             else:
